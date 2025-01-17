@@ -1,31 +1,75 @@
-# Problem Statement
+# ASSIGNMENT
+You have to develop endpoints in whichever tech stack you like along with the database of your choice.
+The description for the following endpoints are given below
 
-We've all fallen down the Reddit rabbit hole, haven't we? So, the designers have just shared the latest designs (attached on the next page), and you are tasked to build this page version using React/Vue (preferably), or any framework of your choice. Would you be able to do that?
+### POST /questions/load
+- Loads questions from stackoverflow API to local database
+- Store the data in suitable tables/documents
+- Refer Stackoverflow API - https://api.stackexchange.com/docs/questions 
 
-   ### You have to make a static page for all the design elements and make it look as close to the design as possible. Pixel Perfect is best.
+### GET /questions
+- Return all questions
+- Should support following filtering
+   1) is_answered
+   2) tags
+   3) < and > answers_count
+- Should support following sorting
+   1) Trending: sort=score(Based on score)
+   2) Latest: sort=created_at(Based on created_at)
+- Pagination (Page Number based i.e page=1)
 
-   ### Links and buttons on the designs are not supposed to work unless asked for specifically below.
+Ex -
+### GET - /questions?is_answered=true&tags=git,python&answers_count__gt=5&answers_count__lt=10&sort=score&page=3
 
-   ### You need to make the popular section dynamic using the Reddit open APIs
+### GET - /questions/:id
+- Fetch the details of the particular question
 
-        https://www.reddit.com/dev/api
+### POST - /questions
+- Creates a new question
 
-        https://www.reddit.com/r/{subreddit}/{sort}/.json?limit={limit}
+### PUT/PATCH - /questions/:id
+- Updates a particular question
 
-   ### Sort options like hot, new, controversial etc, should make use of the API.
+### DELETE - /questions/:id
+- Deletes a particular questions
 
-    A subreddit is a Reddit community for a specific topic, named as r/topic For example - r/technology
+#### All the above endpoints should perform operations on your local database except the first API which involves interacting with the stackoverflow API
 
-   ### limit- limits the number of posts
+## Accessing the routes
 
-   ### Other sections, like the favorites, reddit feeds, etc, are not required to be made dynamic and can be hard coded.
+### GET routes
+    /questions/get?Queries
+    or 
+    /questions/:id 
+### POST routes
+    /questions/post/
+    
+    requst body:
+    {
+         "tags": [
+      "flutter",
+      "git"
+    ],
+    "owner": {
+      "account_id": "000000",
+      "user_id": "000000",
+      "username": "Anonymous"
+    },
+    "is_answered": false,
+    "view_count": 1,
+    "answer_count": 0,
+    "score": 0,
+    "creation_date": "1970-01-21T02:31:46.238Z",
+    "question_id": 79364016,
+    "content_license": "Unknown",
+    "link": "",
+    "title": "test Question",
+    "last_edit_date": 1737106238,
+    "__v": 0
+  }
 
-    Making the search work with the API will be a bonus :)
+  ### PUT route
+    /questions/put/:id
 
-        https://www.reddit.com/search.json?q={query}
-
-    Additional Considerations
-
-        Pagination: You may make use of after and before parameters to navigate through result sets. (optional)
-
-        Rate Limiting: Be mindful of Reddit's API rate limits to avoid being throttled.
+  #### DELETE route
+    /questions/delete/:id
