@@ -35,6 +35,12 @@ Ex -
 
 #### All the above endpoints should perform operations on your local database except the first API which involves interacting with the stackoverflow API
 
+## Setting up the project
+ Before Starting the project 
+ run "npm i" command to install the necessary packages
+ then create an .env file and add your local database url to the file 
+ Now, run the project.
+
 ## Accessing the routes
 
 ### GET routes
